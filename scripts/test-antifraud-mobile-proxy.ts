@@ -152,7 +152,7 @@ async function testCreepJSScore(testName: string, useAntiDetection: boolean, use
 
     if (scores.allScores && scores.allScores.length > 0) {
       console.log(`\n📋 All Detected Scores:`);
-      scores.allScores.forEach((score, i) => {
+      scores.allScores.forEach((score: any, i: number) => {
         console.log(`   ${i + 1}. ${score}`);
       });
     }

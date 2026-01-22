@@ -127,6 +127,11 @@ export async function getNextJob(ignoreScheduledTime = false): Promise<SessionJo
     scheduledTime: new Date(item.scheduledTime),
     status: item.status,
     distribution: item.distribution || undefined,
+    warmUpSites: item.warmUpSites || ['google.com', 'facebook.com', 'wikipedia.org'],
+    referrer: item.referrer || 'google',
+    sessionSeed: item.sessionSeed || `${item.botId}-${item.sessionNumber}`,
+    ctrEnabled: item.ctrEnabled !== undefined ? item.ctrEnabled : false,
+    swipeCount: item.swipeCount !== undefined ? item.swipeCount : 0,
   };
 }
 
@@ -183,6 +188,11 @@ export async function getNextJobForRun(
     scheduledTime: new Date(candidate.scheduledTime),
     status: candidate.status,
     distribution: candidate.distribution || undefined,
+    warmUpSites: candidate.warmUpSites || ['google.com', 'facebook.com', 'wikipedia.org'],
+    referrer: candidate.referrer || 'google',
+    sessionSeed: candidate.sessionSeed || `${candidate.botId}-${candidate.sessionNumber}`,
+    ctrEnabled: candidate.ctrEnabled !== undefined ? candidate.ctrEnabled : false,
+    swipeCount: candidate.swipeCount !== undefined ? candidate.swipeCount : 0,
   };
 }
 
@@ -272,6 +282,11 @@ export async function getNextJobForWorker(
     scheduledTime: new Date(item.scheduledTime),
     status: item.status,
     distribution: item.distribution || undefined,
+    warmUpSites: item.warmUpSites || ['google.com', 'facebook.com', 'wikipedia.org'],
+    referrer: item.referrer || 'google',
+    sessionSeed: item.sessionSeed || `${item.botId}-${item.sessionNumber}`,
+    ctrEnabled: item.ctrEnabled !== undefined ? item.ctrEnabled : false,
+    swipeCount: item.swipeCount !== undefined ? item.swipeCount : 0,
   };
 }
 
@@ -564,5 +579,10 @@ export async function getJobsByStatus(status: 'pending' | 'active' | 'completed'
     runId: item.runId,
     scheduledTime: new Date(item.scheduledTime),
     status: item.status,
+    warmUpSites: item.warmUpSites || ['google.com', 'facebook.com', 'wikipedia.org'],
+    referrer: item.referrer || 'google',
+    sessionSeed: item.sessionSeed || `${item.botId}-${item.sessionNumber}`,
+    ctrEnabled: item.ctrEnabled !== undefined ? item.ctrEnabled : false,
+    swipeCount: item.swipeCount !== undefined ? item.swipeCount : 0,
   }));
 }

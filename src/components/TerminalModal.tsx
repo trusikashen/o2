@@ -27,8 +27,6 @@ export function TerminalModal({ isOpen, onClose }: TerminalModalProps) {
       try {
         const { Terminal } = await import('xterm');
         const { FitAddon } = await import('xterm-addon-fit');
-        // Import CSS dynamically
-        await import('xterm/css/xterm.css');
 
         const term = new Terminal({
           cols: 120,

@@ -26,10 +26,10 @@ export async function POST(request: NextRequest) {
     const expiresAt = Date.now() + 24 * 60 * 60 * 1000;
     
     // Сохранить в глобальную переменную
-    if (!global.authTokens) {
-      global.authTokens = new Map();
+    if (!(global as any).authTokens) {
+      (global as any).authTokens = new Map();
     }
-    global.authTokens.set(token, { username, expiresAt });
+    (global as any).authTokens.set(token, { username, expiresAt });
 
     return NextResponse.json({ token });
   } catch (error: any) {

@@ -1,7 +1,7 @@
 // Define environment variable schemas
 export interface EnvVariable {
   key: string;
-  value: string;
+  value?: string;
   type: 'text' | 'password' | 'number' | 'boolean' | 'select';
   label: string;
   description?: string;

@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error('Error fetching worker configs:', error);    // If table doesn't exist, return empty array
     // User can then create configs and table will be auto-created
-    if (error.__type === 'com.amazonaws.dynamodb.v20120810#ResourceNotFoundException') {
+    if ((error as any).__type === 'com.amazonaws.dynamodb.v20120810#ResourceNotFoundException') {
       return NextResponse.json([]);
     }    return NextResponse.json(
       { error: 'Failed to fetch worker configurations' },

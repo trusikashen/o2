@@ -12,12 +12,12 @@ export async function GET(request: NextRequest) {
     }
 
     // Проверить токен в памяти
-    if (global.authTokens && global.authTokens.has(token)) {
-      const tokenData = global.authTokens.get(token);
+    if ((global as any).authTokens && (global as any).authTokens.has(token)) {
+      const tokenData = (global as any).authTokens.get(token);
       
       // Проверить expiration
       if (tokenData.expiresAt < Date.now()) {
-        global.authTokens.delete(token);
+        (global as any).authTokens.delete(token);
         return NextResponse.json(
           { error: 'Token expired' },
           { status: 401 }

@@ -157,6 +157,11 @@ export async function createJobsForRun(runId: string): Promise<void> {
         runId, // Associate with run
         scheduledTime,
         status: 'pending',
+        warmUpSites: ['google.com', 'facebook.com', 'wikipedia.org'],
+        referrer: 'google',
+        sessionSeed: `${botId}-${sessionNum}`,
+        ctrEnabled: Math.random() < 0.1,
+        swipeCount: Math.random() < 0.45 ? 0 : Math.floor(Math.random() * 6) + 1,
       };
 
       // Distribution will be assigned after all jobs are created (to ensure diversity)
