@@ -1,42 +1,26 @@
 {
   "pages": {
     "/_not-found/page": [
-      "static/chunks/webpack-97df0505866a1ff6.js",
-      "static/chunks/fd9d1056-e70a490eb02719dc.js",
-      "static/chunks/117-0c8229c40dc17f7c.js",
+      "static/chunks/webpack-bab412d30690e0f1.js",
+      "static/chunks/fd9d1056-cf48984c1108c87a.js",
+      "static/chunks/117-9872039dd9016b44.js",
       "static/chunks/main-app-8c14e97da1c4d2b3.js",
-      "static/chunks/app/_not-found/page-f32d72997ecf5312.js"
+      "static/chunks/app/_not-found/page-29569d72a77dd479.js"
     ],
     "/layout": [
-      "static/chunks/webpack-97df0505866a1ff6.js",
-      "static/chunks/fd9d1056-e70a490eb02719dc.js",
-      "static/chunks/117-0c8229c40dc17f7c.js",
+      "static/chunks/webpack-bab412d30690e0f1.js",
+      "static/chunks/fd9d1056-cf48984c1108c87a.js",
+      "static/chunks/117-9872039dd9016b44.js",
       "static/chunks/main-app-8c14e97da1c4d2b3.js",
-      "static/css/4f379c3aca61786f.css",
-      "static/chunks/app/layout-849cad30462b9477.js"
+      "static/css/28ae588ed7fc6044.css",
+      "static/chunks/app/layout-4342fe6eaa4e5eeb.js"
     ],
     "/admin/workers/page": [
-      "static/chunks/webpack-97df0505866a1ff6.js",
-      "static/chunks/fd9d1056-e70a490eb02719dc.js",
-      "static/chunks/117-0c8229c40dc17f7c.js",
+      "static/chunks/webpack-bab412d30690e0f1.js",
+      "static/chunks/fd9d1056-cf48984c1108c87a.js",
+      "static/chunks/117-9872039dd9016b44.js",
       "static/chunks/main-app-8c14e97da1c4d2b3.js",
-      "static/chunks/app/admin/workers/page-320b27acd86b8c1c.js"
-    ],
-    "/adsterra/[runId]/page": [
-      "static/chunks/webpack-97df0505866a1ff6.js",
-      "static/chunks/fd9d1056-e70a490eb02719dc.js",
-      "static/chunks/117-0c8229c40dc17f7c.js",
-      "static/chunks/main-app-8c14e97da1c4d2b3.js",
-      "static/chunks/648-4015fd36f9f20a44.js",
-      "static/chunks/app/adsterra/[runId]/page-5048f5c7185788ea.js"
-    ],
-    "/adsterra/page": [
-      "static/chunks/webpack-97df0505866a1ff6.js",
-      "static/chunks/fd9d1056-e70a490eb02719dc.js",
-      "static/chunks/117-0c8229c40dc17f7c.js",
-      "static/chunks/main-app-8c14e97da1c4d2b3.js",
-      "static/chunks/648-4015fd36f9f20a44.js",
-      "static/chunks/app/adsterra/page-b3f87c6e14938eaf.js"
+      "static/chunks/app/admin/workers/page-f91e117289bbeb10.js"
     ]
   }
 }

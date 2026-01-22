@@ -1,22 +1,4 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
-  "/admin/workers/page": "app/admin/workers/page.js",
-  "/adsterra/[runId]/page": "app/adsterra/[runId]/page.js",
-  "/api/admin/workers/[workerId]/config/route": "app/api/admin/workers/[workerId]/config/route.js",
-  "/adsterra/page": "app/adsterra/page.js",
-  "/api/admin/workers/route": "app/api/admin/workers/route.js",
-  "/api/adsterra/runs/[runId]/route": "app/api/adsterra/runs/[runId]/route.js",
-  "/api/adsterra/runs/[runId]/schedule/route": "app/api/adsterra/runs/[runId]/schedule/route.js",
-  "/api/adsterra/runs/[runId]/start/route": "app/api/adsterra/runs/[runId]/start/route.js",
-  "/api/adsterra/runs/[runId]/stats/route": "app/api/adsterra/runs/[runId]/stats/route.js",
-  "/api/adsterra/runs/route": "app/api/adsterra/runs/route.js",
-  "/api/env/route": "app/api/env/route.js",
-  "/api/terminal/route": "app/api/terminal/route.js",
-  "/api/adsterra/runs/[runId]/test-local/route": "app/api/adsterra/runs/[runId]/test-local/route.js",
-  "/api/workers/status/route": "app/api/workers/status/route.js",
-  "/api/workers/heartbeat/route": "app/api/workers/heartbeat/route.js",
-  "/api/adsterra/runs/[runId]/stop/route": "app/api/adsterra/runs/[runId]/stop/route.js",
-  "/api/jobs/clear/route": "app/api/jobs/clear/route.js",
-  "/api/auth/login/route": "app/api/auth/login/route.js",
-  "/api/auth/verify/route": "app/api/auth/verify/route.js"
+  "/admin/workers/page": "app/admin/workers/page.js"
 }

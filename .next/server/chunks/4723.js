@@ -1,1 +1,0 @@
-"use strict";exports.id=4723,exports.ids=[4723],exports.modules={4723:(s,e,t)=>{t.d(e,{DynamoDBClient:()=>o.c});var o=t(2727)}};

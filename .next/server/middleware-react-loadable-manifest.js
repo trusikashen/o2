@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST='{"components\\\\TerminalModal.tsx -> xterm":{"id":9486,"files":["static/chunks/30d07d85.9045c666bb43d9e1.js"]},"components\\\\TerminalModal.tsx -> xterm-addon-fit":{"id":5896,"files":["static/chunks/896.c61b837722872087.js"]}}';
+self.__REACT_LOADABLE_MANIFEST="{}";

@@ -1,13 +1,20 @@
 # Netlify configuration for Adsterra Bot Frontend
 # Deployed with Next.js and OpenNextJS plugin for dynamic routes and API
 
+# Netlify configuration for Adsterra Bot Frontend
+# Static frontend deployment - API calls proxied to AWS backend
+
 [build]
   command = "npm run build:netlify"
-  publish = ".netlify"
+  publish = "out"
   environment = { NODE_VERSION = "18.17.0" }
 
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
+# Redirect API calls to AWS backend
+[[redirects]]
+  from = "/api/*"
+  to = "http://100.48.93.18:3000/api/:splat"
+  status = 200
+  force = true
 
 # Environment variables
 [context.production.environment]

@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Export as static site - API calls will be proxied to AWS backend
+  output: 'export',
   // Mark Playwright and related packages as external (server-side only)
   experimental: {
     serverComponentsExternalPackages: [
