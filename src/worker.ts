@@ -418,13 +418,6 @@ async function workerLoop() {
             ? ((stats.completed / (stats.completed + stats.failed)) * 100).toFixed(1) 
             : '0.0';
           
-          console.log(`\nRun: ${run.id.substring(0, 8)}...`);
-          console.log(`  ✅ Completed: ${stats.completed} / ${total} (${progress}%)`);
-          console.log(`  ❌ Failed: ${stats.failed}`);
-          console.log(`  ⏳ Waiting: ${stats.waiting}`);
-          console.log(`  🔄 Active: ${stats.active}`);
-          console.log(`  📈 Success Rate: ${successRate}%`);
-          
           // PRODUCTION: Auto-mark run as completed when all jobs are done (but only if still running)
           // Note: Completion is also checked immediately after each job, so this is just a periodic summary
           if (stats.waiting === 0 && stats.active === 0 && stats.completed > 0 && run.status === 'running') {
