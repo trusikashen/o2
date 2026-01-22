@@ -1,6 +1,9 @@
 {
-  "/adsterra/page": "app/adsterra/page.js",
   "/api/adsterra/runs/route": "app/api/adsterra/runs/route.js",
+  "/adsterra/page": "app/adsterra/page.js",
   "/api/adsterra/runs/[runId]/stats/route": "app/api/adsterra/runs/[runId]/stats/route.js",
-  "/api/env/route": "app/api/env/route.js"
+  "/api/adsterra/runs/[runId]/start/route": "app/api/adsterra/runs/[runId]/start/route.js",
+  "/api/adsterra/runs/[runId]/schedule/route": "app/api/adsterra/runs/[runId]/schedule/route.js",
+  "/api/adsterra/runs/[runId]/stop/route": "app/api/adsterra/runs/[runId]/stop/route.js",
+  "/api/jobs/clear/route": "app/api/jobs/clear/route.js"
 }

@@ -144,63 +144,32 @@ async function processJob(semaphore: Semaphore, workerId?: string) {
     const RUN_ID = process.env.RUN_ID;
     const WORKER_ID = workerId || process.env.WORKER_ID || 'default-worker';
     
-    // CRITICAL FIX: First, determine pacing mode BEFORE selecting job
-    // This ensures we respect scheduling for 'human' mode
-    let pacingMode = 'human'; // Default to human (strict scheduling)
-    
-    if (RUN_ID) {
-      // If this worker was launched for a specific run, load that run's config first
-      try {
-        const ADSTERRA_RUNS_TABLE = process.env.DYNAMODB_ADSTERRA_RUNS_TABLE || 'AdsterraRuns';
-        const ddbClient = new DynamoDBClient({
-          region: process.env.AWS_REGION || 'us-east-1',
-        });
-        const ddbDocClient = DynamoDBDocumentClient.from(ddbClient);
-        
-        const result = await ddbDocClient.send(
-          new QueryCommand({
-            TableName: ADSTERRA_RUNS_TABLE,
-            KeyConditionExpression: 'PK = :pk AND SK = :sk',
-            ExpressionAttributeValues: {
-              ':pk': `RUN#${RUN_ID}`,
-              ':sk': 'META',
-            },
-          })
-        );
-
-        if (result.Items && result.Items.length > 0) {
-          const run = result.Items[0] as any;
-          pacingMode = run.config?.pacingMode || 'human';
-        }
-      } catch (error: any) {
-        // Use default pacing mode if error loading config
-        pacingMode = 'human';
-      }
-    }
-    
-    // Now select job with CORRECT ignoreScheduledTime based on pacing mode
-    // For 'human' mode: ALWAYS respect scheduled times (ignoreScheduledTime=false)
-    // For other modes: can ignore scheduled times
-    const ignoreScheduledTimeFlag = pacingMode !== 'human';
+    // Use PROCESS_IMMEDIATELY env var to determine if we should ignore scheduled times
+    // Default to 'true' to match old working behavior
+    // This ensures jobs are picked up immediately regardless of pacing mode
+    const PROCESS_IMMEDIATELY = (process.env.PROCESS_IMMEDIATELY ?? 'true') === 'true';
     
     // Priority: if RUN_ID is set, use run-specific query; otherwise use worker-specific query if workerId is provided
     if (RUN_ID) {
-      job = await getNextJobForRun(RUN_ID, ignoreScheduledTimeFlag);
+      job = await getNextJobForRun(RUN_ID, PROCESS_IMMEDIATELY);
     } else if (workerId) {
-      job = await getNextJobForWorker(WORKER_ID, ignoreScheduledTimeFlag);
+      job = PROCESS_IMMEDIATELY
+        ? await getNextJobForWorker(WORKER_ID, true)
+        : await getNextJobForWorker(WORKER_ID, false);
     } else {
-      job = await getNextJob(ignoreScheduledTimeFlag);
+      job = PROCESS_IMMEDIATELY
+        ? await getNextJob(true)
+        : await getNextJob(false);
     }
 
     if (!job) {
       // No jobs found in initial query — try a final fallback
-      // Only ignore schedule if NOT in human mode
       if (!RUN_ID && workerId) {
-        job = await getNextJobForWorker(WORKER_ID, ignoreScheduledTimeFlag);
+        job = await getNextJobForWorker(WORKER_ID, PROCESS_IMMEDIATELY);
       } else if (RUN_ID) {
-        job = await getNextJobForRun(RUN_ID, ignoreScheduledTimeFlag);
+        job = await getNextJobForRun(RUN_ID, PROCESS_IMMEDIATELY);
       } else {
-        job = await getNextJob(ignoreScheduledTimeFlag);
+        job = await getNextJob(PROCESS_IMMEDIATELY);
       }
       if (!job) {
         semaphore.release();
