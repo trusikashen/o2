@@ -18,13 +18,22 @@
 
 # Environment variables
 [context.production.environment]
-  REACT_APP_API_URL = "http://100.48.93.18:3000"
   NEXT_PUBLIC_API_URL = "http://100.48.93.18:3000"
+  REACT_APP_API_URL = "http://100.48.93.18:3000"
+  APP_USERNAME = "aixsystem"
+  APP_PASSWORD = "nemesisN3M3616"
+  AWS_REGION = "us-east-1"
 
 [context.preview.environment]
-  REACT_APP_API_URL = "http://100.48.93.18:3000"
   NEXT_PUBLIC_API_URL = "http://100.48.93.18:3000"
+  REACT_APP_API_URL = "http://100.48.93.18:3000"
+  APP_USERNAME = "aixsystem"
+  APP_PASSWORD = "nemesisN3M3616"
+  AWS_REGION = "us-east-1"
 
 [context.branch-deploy.environment]
-  REACT_APP_API_URL = "http://100.48.93.18:3000"
   NEXT_PUBLIC_API_URL = "http://100.48.93.18:3000"
+  REACT_APP_API_URL = "http://100.48.93.18:3000"
+  APP_USERNAME = "aixsystem"
+  APP_PASSWORD = "nemesisN3M3616"
+  AWS_REGION = "us-east-1"
