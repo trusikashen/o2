@@ -1,5 +1,5 @@
 /**
- * DynamoDB helpers for Adsterra Bot System
+ * DynamoDB helpers for AIX Bot System
  */
 
 import { ddbDocClient } from './dynamo';

@@ -1,7 +1,7 @@
 import { botConfig } from './config';
 import { getQueueStats } from './queue';
 
-console.log('📊 Adsterra Bot System - Dashboard');
+console.log('📊 AIX Bot System - Dashboard');
 console.log('==================================');
 console.log(`Total Bots: ${botConfig.totalBots}`);
 console.log(`Sessions per Bot: ${botConfig.sessionsPerBot}`);

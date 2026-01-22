@@ -7,7 +7,7 @@
 
 ## 📊 EXECUTIVE SUMMARY
 
-This document provides a complete architectural analysis of the existing Adsterra bot system and identifies the integration points for the new realistic session system that will bypass anti-fraud detection through:
+This document provides a complete architectural analysis of the existing AIX Bot System and identifies the integration points for the new realistic session system that will bypass anti-fraud detection through:
 
 1. **Pre-warming navigation** WITHOUT proxy (30-60s warmup on legitimate sites)
 2. **Realistic proxy activation** (5-15s delay after warmup)

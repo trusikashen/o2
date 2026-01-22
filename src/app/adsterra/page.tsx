@@ -461,7 +461,7 @@ export default function AdsterraPage() {
     <div className={`min-h-screen p-4 transition-colors ${darkMode ? 'bg-slate-900' : 'bg-gray-50'}`}>
       <div className="max-w-7xl mx-auto">
         <div className="mb-4 flex justify-between items-center flex-wrap gap-3">
-          <h1 className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>🤖 Adsterra Bot System</h1>
+          <h1 className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>🤖 AIX Bot System</h1>
           <div className="flex gap-2 flex-wrap">
             <button
               onClick={() => setDarkMode(!darkMode)}
@@ -1133,45 +1133,45 @@ export default function AdsterraPage() {
 
                   {/* Stats if available */}
                   {runStats[run.id] && (
-                    <div className={`mb-1.5 p-2 rounded border ${darkMode ? 'bg-slate-700 border-slate-600' : 'bg-gray-50 border-gray-200'}`}>
-                      <p className={`text-xs font-medium uppercase tracking-wide mb-1 ${darkMode ? 'text-slate-400' : 'text-gray-500'}`}>📊 Job Queue Status</p>
-                      <div className="grid grid-cols-4 gap-1.5">
+                    <div className={`mb-1 p-1 rounded border ${darkMode ? 'bg-slate-700 border-slate-600' : 'bg-gray-50 border-gray-200'}`}>
+                      <p className={`text-xs font-medium uppercase tracking-wide mb-0.5 ${darkMode ? 'text-slate-400' : 'text-gray-500'}`}>📊 Job Queue Status</p>
+                      <div className="grid grid-cols-4 gap-1">
                         <div 
-                          className={`rounded px-1.5 py-1 text-center cursor-help transition-opacity hover:opacity-80 ${darkMode ? 'bg-slate-600 text-yellow-300' : 'bg-white text-yellow-600'}`}
+                          className={`rounded px-1 py-0.5 text-center cursor-help transition-opacity hover:opacity-80 ${darkMode ? 'bg-slate-600 text-yellow-300' : 'bg-white text-yellow-600'}`}
                           title="Waiting: Jobs in queue, not yet started"
                         >
-                          <span className="block font-semibold text-lg">⏳</span>
-                          <p className="font-bold text-lg">
+                          <span className="block font-semibold text-base">⏳</span>
+                          <p className="font-bold text-sm">
                             {(runStats[run.id]?.total || totalSessions) - (runStats[run.id]?.active || 0) - (runStats[run.id]?.completed || 0) - (runStats[run.id]?.failed || 0)}
                           </p>
                           <p className="text-xs">Waiting</p>
                         </div>
                         <div 
-                          className={`rounded px-1.5 py-1 text-center cursor-help transition-opacity hover:opacity-80 ${darkMode ? 'bg-slate-600 text-green-300' : 'bg-white text-green-600'}`}
+                          className={`rounded px-1 py-0.5 text-center cursor-help transition-opacity hover:opacity-80 ${darkMode ? 'bg-slate-600 text-green-300' : 'bg-white text-green-600'}`}
                           title="Active: Jobs currently running in browsers"
                         >
-                          <span className="block font-semibold text-lg">🟢</span>
-                          <p className="font-bold text-lg">
+                          <span className="block font-semibold text-base">🟢</span>
+                          <p className="font-bold text-sm">
                             {runStats[run.id]?.active || 0}
                           </p>
                           <p className="text-xs">Active</p>
                         </div>
                         <div 
-                          className={`rounded px-1.5 py-1 text-center cursor-help transition-opacity hover:opacity-80 ${darkMode ? 'bg-slate-600 text-blue-300' : 'bg-white text-blue-600'}`}
+                          className={`rounded px-1 py-0.5 text-center cursor-help transition-opacity hover:opacity-80 ${darkMode ? 'bg-slate-600 text-blue-300' : 'bg-white text-blue-600'}`}
                           title="Completed: Successful job executions"
                         >
-                          <span className="block font-semibold text-lg">✅</span>
-                          <p className="font-bold text-lg">
+                          <span className="block font-semibold text-base">✅</span>
+                          <p className="font-bold text-sm">
                             {runStats[run.id]?.completed || 0}
                           </p>
                           <p className="text-xs">Completed</p>
                         </div>
                         <div 
-                          className={`rounded px-1.5 py-1 text-center cursor-help transition-opacity hover:opacity-80 ${darkMode ? 'bg-slate-600 text-red-300' : 'bg-white text-red-600'}`}
+                          className={`rounded px-1 py-0.5 text-center cursor-help transition-opacity hover:opacity-80 ${darkMode ? 'bg-slate-600 text-red-300' : 'bg-white text-red-600'}`}
                           title="Failed: Jobs that encountered errors"
                         >
-                          <span className="block font-semibold text-lg">❌</span>
-                          <p className="font-bold text-lg">
+                          <span className="block font-semibold text-base">❌</span>
+                          <p className="font-bold text-sm">
                             {runStats[run.id]?.failed || 0}
                           </p>
                           <p className="text-xs">Failed</p>
@@ -1181,15 +1181,15 @@ export default function AdsterraPage() {
                   )}
 
                   {/* Configuration Details */}
-                  <div className="mb-1.5">
+                  <div className="mb-1">
                     <details className={`cursor-pointer font-medium ${darkMode ? 'text-slate-300 hover:text-slate-100' : 'text-gray-600 hover:text-gray-900'}`}>
-                      <summary className={`py-1 px-2 rounded-lg font-semibold text-sm uppercase tracking-wide transition-colors ${darkMode ? 'bg-slate-700 hover:bg-slate-600 text-slate-200' : 'bg-gray-100 hover:bg-gray-200 text-gray-900'}`}>
+                      <summary className={`py-0.5 px-2 rounded-lg font-semibold text-xs uppercase tracking-wide transition-colors ${darkMode ? 'bg-slate-700 hover:bg-slate-600 text-slate-200' : 'bg-gray-100 hover:bg-gray-200 text-gray-900'}`}>
                         ⚙️ Config
                       </summary>
-                      <div className={`mt-1 p-2 rounded-lg space-y-1.5 ${darkMode ? 'bg-slate-700 border border-slate-600 text-slate-200' : 'bg-white border border-gray-200 text-gray-700'}`}>
+                      <div className={`mt-0.5 p-1 rounded-lg space-y-1 ${darkMode ? 'bg-slate-700 border border-slate-600 text-slate-200' : 'bg-white border border-gray-200 text-gray-700'}`}>
                         <div>
                           <p className={`text-xs font-semibold uppercase mb-0.5 ${darkMode ? 'text-slate-400' : 'text-gray-500'}`}>🔗 URL</p>
-                          <p className="break-all font-mono text-xs px-2 py-1 rounded bg-opacity-50 bg-slate-900">{run?.config?.adsterraUrl || 'N/A'}</p>
+                          <p className="break-all font-mono text-xs px-1 py-0.5 rounded bg-opacity-50 bg-slate-900">{run?.config?.adsterraUrl || 'N/A'}</p>
                         </div>
                         {run?.config?.distribution && (
                           <p className={`text-xs font-medium ${darkMode ? 'text-slate-300' : 'text-gray-600'}`}>
@@ -1200,23 +1200,23 @@ export default function AdsterraPage() {
                     </details>
                   </div>
 
-                  <div className="flex gap-1.5 mt-1.5 flex-wrap">
+                  <div className="flex gap-1 mt-1 flex-wrap">
                     <Link
                       href={`/adsterra/${run.id}`}
-                      className={`px-2 py-1.5 rounded-lg font-semibold text-xs transition-all transform hover:scale-105 ${darkMode ? 'bg-blue-700 hover:bg-blue-600 text-white shadow' : 'bg-blue-600 hover:bg-blue-700 text-white shadow'}`}
+                      className={`px-2 py-1 rounded-lg font-semibold text-xs transition-all transform hover:scale-105 ${darkMode ? 'bg-blue-700 hover:bg-blue-600 text-white shadow' : 'bg-blue-600 hover:bg-blue-700 text-white shadow'}`}
                     >
                       Details
                     </Link>
                     <button
                       onClick={() => handleViewSchedule(run.id)}
-                      className={`px-2 py-1.5 rounded-lg font-semibold text-xs transition-all transform hover:scale-105 ${darkMode ? 'bg-indigo-700 hover:bg-indigo-600 text-white shadow' : 'bg-indigo-600 hover:bg-indigo-700 text-white shadow'}`}
+                      className={`px-2 py-1 rounded-lg font-semibold text-xs transition-all transform hover:scale-105 ${darkMode ? 'bg-indigo-700 hover:bg-indigo-600 text-white shadow' : 'bg-indigo-600 hover:bg-indigo-700 text-white shadow'}`}
                     >
                       Schedule
                     </button>
                     {run.status === 'running' ? (
                       <button
                         onClick={() => handleStopRun(run.id)}
-                        className={`px-2 py-1.5 rounded-lg font-semibold text-xs transition-all transform hover:scale-105 ${darkMode ? 'bg-red-700 hover:bg-red-600 text-white shadow' : 'bg-red-600 hover:bg-red-700 text-white shadow'}`}
+                        className={`px-2 py-1 rounded-lg font-semibold text-xs transition-all transform hover:scale-105 ${darkMode ? 'bg-red-700 hover:bg-red-600 text-white shadow' : 'bg-red-600 hover:bg-red-700 text-white shadow'}`}
                       >
                         Stop
                       </button>
@@ -1224,13 +1224,13 @@ export default function AdsterraPage() {
                       <>
                         <button
                           onClick={() => handleStartRun(run.id)}
-                          className={`px-2 py-1.5 rounded-lg font-semibold text-xs transition-all transform hover:scale-105 ${darkMode ? 'bg-green-700 hover:bg-green-600 text-white shadow' : 'bg-green-600 hover:bg-green-700 text-white shadow'}`}
+                          className={`px-2 py-1 rounded-lg font-semibold text-xs transition-all transform hover:scale-105 ${darkMode ? 'bg-green-700 hover:bg-green-600 text-white shadow' : 'bg-green-600 hover:bg-green-700 text-white shadow'}`}
                         >
                           Start
                         </button>
                         <button
                           onClick={() => handleTestLocally(run.id)}
-                          className={`px-2 py-1.5 rounded-lg font-semibold text-xs transition-all transform hover:scale-105 ${darkMode ? 'bg-purple-700 hover:bg-purple-600 text-white shadow' : 'bg-purple-600 hover:bg-purple-700 text-white shadow'}`}
+                          className={`px-2 py-1 rounded-lg font-semibold text-xs transition-all transform hover:scale-105 ${darkMode ? 'bg-purple-700 hover:bg-purple-600 text-white shadow' : 'bg-purple-600 hover:bg-purple-700 text-white shadow'}`}
                         >
                           Test
                         </button>
@@ -1238,7 +1238,7 @@ export default function AdsterraPage() {
                     )}
                     <button
                       onClick={() => handleDeleteRun(run.id)}
-                      className={`px-2 py-1.5 rounded-lg font-semibold text-xs transition-all transform hover:scale-105 ${darkMode ? 'bg-gray-700 hover:bg-gray-600 text-white shadow' : 'bg-gray-600 hover:bg-gray-700 text-white shadow'}`}
+                      className={`px-2 py-1 rounded-lg font-semibold text-xs transition-all transform hover:scale-105 ${darkMode ? 'bg-gray-700 hover:bg-gray-600 text-white shadow' : 'bg-gray-600 hover:bg-gray-700 text-white shadow'}`}
                     >
                       Delete
                     </button>

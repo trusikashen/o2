@@ -117,7 +117,7 @@ async function createTable(
 }
 
 async function main() {
-  console.log('🚀 Setting up AWS resources for Adsterra Bot System...\n');
+  console.log('🚀 Setting up AWS resources for AIX Bot System...\n');
   console.log(`AWS Region: ${process.env.AWS_REGION || 'us-east-1'}`);
   console.log(`Table Name: ${ADSTERRA_RUNS_TABLE}`);
 
@@ -151,7 +151,7 @@ async function main() {
     console.log('   - Billing Mode: PAY_PER_REQUEST (on-demand)');
     console.log('\n📋 Created Table:');
     console.log(`   ✅ ${ADSTERRA_RUNS_TABLE} - Adsterra bot runs`);
-    console.log('\n💡 You can now start using the Adsterra bot system!');
+    console.log('\n💡 You can now start using the AIX Bot System!');
     console.log('\n📝 Next Steps:');
     console.log('   1. Make sure Redis is running (for queue system)');
     console.log('   2. Start the orchestrator: npm run orchestrator');
