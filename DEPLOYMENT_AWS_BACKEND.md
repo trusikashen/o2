@@ -49,10 +49,10 @@ cp .env.aws .env
 
 Обнови в `.env`:
 ```env
-# Одинаковые для всех машин (из твоего .env)
+# Одинаковые для всех машин (замени на СВОИ ЗНАЧЕНИЯ!)
 AWS_REGION=us-east-1
-AWS_ACCESS_KEY_ID=AKIAZPEOI36DJG2ABS5Z
-AWS_SECRET_ACCESS_KEY=7H5kgrkG2B2qAMxHBOrW8nrlbsj+pkOhKY6juziF
+AWS_ACCESS_KEY_ID=AKIA_YOUR_REAL_KEY_ID
+AWS_SECRET_ACCESS_KEY=YOUR_REAL_SECRET_KEY
 
 # SSH Terminal конфиг (подключение К этой машине)
 SSH_VM_IP=100.48.93.18
