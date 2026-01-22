@@ -313,22 +313,7 @@ export class AdsterraSession {
             if (display) {
               console.log(`   🖥️  DISPLAY=${display} (Xvfb virtual display detected)`);
             } else {
-              console.log(`   ⚠️  WARNING: Headed mode on Linux but no DISPLAY env var! Browsers may fail.`);
             }
-          }
-          
-          if (!config.browserHeadless) {
-            console.log(`   ✅ HEADED MODE: Browser will render visibly (required for Adsterra impressions)`);
-          } else {
-            console.log(`   ⚠️  HEADLESS MODE: Browser runs without display (impressions may not count on Adsterra)`);
-          }
-          console.log(`   🌍 Country: ${countryNames[country] || country.toUpperCase()}`);
-          console.log(`   📱 Device: ${deviceName} (${deviceConfig.isMobile ? 'Mobile' : deviceConfig.hasTouch ? 'Tablet' : 'Desktop'})`);
-          console.log(`   🌐 Browser: ${browserNames[browserType] || browserType.toUpperCase()}`);
-          if (PROXY_PROVIDER === 'brightdata') {
-            console.log(`   🆔 Session ID: ${sessionId} (ensures unique IP per bot)`);
-            console.log(`   🌍 Proxy Username: ${proxyUsername} (mobile proxy: session + country)`);
-            console.log(`   ✅ Each bot gets unique ${countryNames[country] || country.toUpperCase()} mobile IP with sticky session`);
           }
 
           // RISK ASSESSMENT: Determine if this bot needs pre-warming
