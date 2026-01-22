@@ -12,19 +12,6 @@ dotenv.config({ path: path.join(__dirname, '../.env') });
 
 const PROXY_PROVIDER = (process.env.PROXY_PROVIDER || 'brightdata').toLowerCase();
 
-// IPRoyal config
-const IPROYAL_SERVER = process.env.IPROYAL_SERVER || 'us9.4g.iproyal.com';
-const IPROYAL_HTTPS_PORT = process.env.IPROYAL_HTTPS_PORT || '7606';
-const IPROYAL_SOCKS5_PORT = process.env.IPROYAL_SOCKS5_PORT || '3606';
-const IPROYAL_USERNAME = process.env.IPROYAL_USERNAME || '3DboxVh';
-const IPROYAL_PASSWORD = process.env.IPROYAL_PASSWORD || 'LilI8x64t5cfMgI';
-
-// DataImpulse config
-const DATAIMPULSE_HOST = process.env.DATAIMPULSE_HOST || 'gw.dataimpulse.com';
-const DATAIMPULSE_PORT = process.env.DATAIMPULSE_PORT || '823';
-const DATAIMPULSE_USERNAME = process.env.DATAIMPULSE_USERNAME || '28a5d35662970ccf60af';
-const DATAIMPULSE_PASSWORD = process.env.DATAIMPULSE_PASSWORD || 'd5929267bca950ac';
-const DATAIMPULSE_COUNTRY_CODE = process.env.DATAIMPULSE_COUNTRY_CODE || 'us';
 
 // BrightData config
 const BRIGHTDATA_HOST = process.env.BRIGHTDATA_HOST || 'brd.superproxy.io';
@@ -32,6 +19,20 @@ const BRIGHTDATA_PORT = process.env.BRIGHTDATA_PORT || '33335';
 const BRIGHTDATA_USERNAME = process.env.BRIGHTDATA_USERNAME || 'brd-customer-hl_d4382b99-zone-residential_proxy1';
 const BRIGHTDATA_PASSWORD = process.env.BRIGHTDATA_PASSWORD || 'o1qvlhpaqg22';
 const BRIGHTDATA_ZONE = process.env.BRIGHTDATA_ZONE || 'residential_proxy1';
+
+// DataImpulse config
+const DATAIMPULSE_HOST = process.env.DATAIMPULSE_HOST || '';
+const DATAIMPULSE_PORT = process.env.DATAIMPULSE_PORT || '';
+const DATAIMPULSE_USERNAME = process.env.DATAIMPULSE_USERNAME || '';
+const DATAIMPULSE_PASSWORD = process.env.DATAIMPULSE_PASSWORD || '';
+const DATAIMPULSE_COUNTRY_CODE = process.env.DATAIMPULSE_COUNTRY_CODE || 'US';
+
+// IPRoyal config
+const IPROYAL_SERVER = process.env.IPROYAL_SERVER || '';
+const IPROYAL_HTTPS_PORT = process.env.IPROYAL_HTTPS_PORT || '';
+const IPROYAL_SOCKS5_PORT = process.env.IPROYAL_SOCKS5_PORT || '';
+const IPROYAL_USERNAME = process.env.IPROYAL_USERNAME || '';
+const IPROYAL_PASSWORD = process.env.IPROYAL_PASSWORD || '';
 
 function getProxyServer(useSocks5 = false): string {
   if (PROXY_PROVIDER === 'brightdata') {
@@ -152,7 +153,7 @@ async function testProxy() {
     }
 
     // Test 3: Access your blog
-    const blogUrl = process.env.BLOG_HOMEPAGE_URL || 'https://thesportamigo.com/';
+    const blogUrl = process.env.BLOG_HOMEPAGE_URL || 'https:samyun-wan.life/blogs';
     console.log(`🧪 Test 3: Accessing your blog (${blogUrl})...`);
     try {
       await page.goto(blogUrl, {

@@ -317,13 +317,6 @@ export class AdsterraSession {
             }
           }
           
-          console.log(`   🌐 Launching browser (headless: ${config.browserHeadless})...`);
-          if (this.config?.browserHeadless !== undefined) {
-            console.log(`   📝 Headless setting from run config: ${this.config.browserHeadless}`);
-          } else {
-            console.log(`   📝 Headless setting from env/default: ${config.browserHeadless}`);
-          }
-          
           if (!config.browserHeadless) {
             console.log(`   ✅ HEADED MODE: Browser will render visibly (required for Adsterra impressions)`);
           } else {
@@ -332,7 +325,6 @@ export class AdsterraSession {
           console.log(`   🌍 Country: ${countryNames[country] || country.toUpperCase()}`);
           console.log(`   📱 Device: ${deviceName} (${deviceConfig.isMobile ? 'Mobile' : deviceConfig.hasTouch ? 'Tablet' : 'Desktop'})`);
           console.log(`   🌐 Browser: ${browserNames[browserType] || browserType.toUpperCase()}`);
-          console.log(`   🔌 Using ${PROXY_PROVIDER.toUpperCase()} proxy: ${getProxyServer()}`);
           if (PROXY_PROVIDER === 'brightdata') {
             console.log(`   🆔 Session ID: ${sessionId} (ensures unique IP per bot)`);
             console.log(`   🌍 Proxy Username: ${proxyUsername} (mobile proxy: session + country)`);
@@ -920,7 +912,7 @@ export class AdsterraSession {
       // Page readiness check - verify browser context is ready before navigation (+ jitter)
       // Max 120 seconds - better to wait longer than fail prematurely
       const MAX_PAGE_READY_WAIT = addJitter(120000);
-      console.log(`   🔍 Checking page readiness (max ${(MAX_PAGE_READY_WAIT/1000).toFixed(1)}s)...`);
+      console.log(`   🔍 Checking PROXY (max ${(MAX_PAGE_READY_WAIT/1000).toFixed(1)}s)...`);
       let readyChecks = 0;
       const maxReadyChecks = 3;
       const readyCheckStart = Date.now();

@@ -265,15 +265,86 @@ export async function DELETE(
   { params }: { params: { runId: string } }
 ) {
   try {
+    // First, delete all jobs associated with this run from DynamoDB
+    console.log(`🗑️  Deleting all jobs for run ${params.runId}...`);
+    
+    const { DynamoDBClient } = await import('@aws-sdk/client-dynamodb');
+    const { DynamoDBDocumentClient, QueryCommand, DeleteCommand } = await import('@aws-sdk/lib-dynamodb');
+    
+    const JOBS_TABLE = process.env.DYNAMODB_ADSTERRA_JOBS_TABLE || 'AdsterraJobs';
+    const ddbClient = new DynamoDBClient({
+      region: process.env.AWS_REGION || 'us-east-1',
+    });
+    const ddbDocClient = DynamoDBDocumentClient.from(ddbClient);
+    
+    // Query all jobs for this run using GSI2
+    let allJobs: any[] = [];
+    let lastEvaluatedKey: any = undefined;
+    let deletedJobsCount = 0;
+    let failedJobsCount = 0;
+    
+    do {
+      const result = await ddbDocClient.send(
+        new QueryCommand({
+          TableName: JOBS_TABLE,
+          IndexName: 'GSI2',
+          KeyConditionExpression: 'GSI2PK = :runId',
+          ExpressionAttributeValues: {
+            ':runId': `RUN#${params.runId}`,
+          },
+          ExclusiveStartKey: lastEvaluatedKey,
+        })
+      );
+      
+      if (result.Items) {
+        allJobs = allJobs.concat(result.Items);
+      }
+      lastEvaluatedKey = result.LastEvaluatedKey;
+    } while (lastEvaluatedKey);
+    
+    console.log(`📊 Found ${allJobs.length} jobs to delete for run ${params.runId}`);
+    
+    // Delete jobs in batches
+    const batchSize = 25;
+    for (let i = 0; i < allJobs.length; i += batchSize) {
+      const batch = allJobs.slice(i, i + batchSize);
+      
+      await Promise.all(
+        batch.map(async (job) => {
+          try {
+            await ddbDocClient.send(
+              new DeleteCommand({
+                TableName: JOBS_TABLE,
+                Key: {
+                  PK: job.PK,
+                  SK: job.SK,
+                },
+              })
+            );
+            deletedJobsCount++;
+          } catch (error: any) {
+            failedJobsCount++;
+            console.error(`❌ Failed to delete job ${job.id}:`, error.message);
+          }
+        })
+      );
+    }
+    
+    console.log(`✅ Deleted ${deletedJobsCount}/${allJobs.length} jobs for run ${params.runId}${failedJobsCount > 0 ? ` (${failedJobsCount} failed)` : ''}`);
+    
+    // Then delete the run itself from DynamoDB
     await deleteAdsterraRun(params.runId);
     
-    // TODO: Also clear jobs from Redis queue
-    
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ 
+      success: true,
+      message: `Run and ${deletedJobsCount} jobs deleted successfully`,
+      jobsDeleted: deletedJobsCount,
+      jobsFailed: failedJobsCount
+    });
   } catch (error: any) {
     console.error('Error deleting run:', error);
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: 'Internal server error', message: error.message },
       { status: 500 }
     );
   }

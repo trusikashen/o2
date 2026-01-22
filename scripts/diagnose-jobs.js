@@ -28,7 +28,7 @@ async function diagnoseJobs() {
     const result = await docClient.send(
       new ScanCommand({
         TableName: tableName,
-        Limit: 50, // Первые 50
+        Limit: 100, // Первые 100
       })
     );
 

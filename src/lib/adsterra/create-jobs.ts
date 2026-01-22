@@ -215,13 +215,15 @@ export async function createJobsForRun(run: AdsterraRun): Promise<void> {
       const sessionSeed = `${deviceSeed}-${sessionNum}`;
       const ctrEnabled = Math.random() < 0.1; // 10% of sessions simulate CTR
       
-      // Realistic interactions distribution:
-      // 45% - NO interactions (just visit the page like normal person)
-      // 55% - 1-6 random interactions (scroll, tap, swipe)
-      const interactionRoll = Math.random();
-      const swipeCount = interactionRoll < 0.45 
-        ? 0 
-        : 1 + Math.floor(Math.random() * 6); // 1-6 swipes for 55%
+      // Random interactions per bot (configurable via ENV)
+      // MIN_INTERACTIONS and MAX_INTERACTIONS allow randomization across bots
+      const minInteractions = parseInt(process.env.MIN_INTERACTIONS || '0', 10);
+      const maxInteractions = parseInt(process.env.MAX_INTERACTIONS || '6', 10);
+      
+      // Each bot gets a random number of interactions within the configured range
+      const swipeCount = minInteractions === 0 && maxInteractions === 0
+        ? 0  // Explicitly disabled
+        : minInteractions + Math.floor(Math.random() * (maxInteractions - minInteractions + 1)); // Random between min and max
 
       // If assignedWorkerIds are specified, distribute jobs round-robin across workers
       // Otherwise, leave unassigned so any worker can claim them

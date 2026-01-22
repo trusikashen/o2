@@ -520,7 +520,7 @@ async function workerLoop() {
     sendWorkerHeartbeat(WORKER_ID).catch(() => {
       // Silently ignore heartbeat errors
     });
-  }, 10000); // Every 10 seconds
+  }, 5000); // Every 10 seconds
 
   const workers: Promise<void>[] = [];
   
