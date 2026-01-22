@@ -105,7 +105,7 @@ async function verifyAntiDetection() {
       console.log(`  • Canvas FP 2 length: ${canvasResult.fingerprint2Length} bytes`);
       console.log(`  • Same fingerprint twice: ${canvasResult.isSame}`);
       console.log(`  • toDataURL hooked: ${canvasResult.isHooked}`);
-      const canvasPass = canvasResult.fingerprint1Length > 500; // Real canvas output
+      const canvasPass = (canvasResult.fingerprint1Length ?? 0) > 500; // Real canvas output
       console.log(`  Result: ${canvasPass ? '✅ WORKING' : '❌ NOT HOOKED'}\n`);
     }
 

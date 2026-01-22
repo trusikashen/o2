@@ -128,10 +128,6 @@ async function inspectCreepJS() {
   } catch (error) {
     console.error(`❌ Error: ${error}`);
   } finally {
-    if (page && browser) {
-      // Keep browser open
-      await browser.waitForEvent('close');
-    }
     if (browser) await browser.close();
   }
 }

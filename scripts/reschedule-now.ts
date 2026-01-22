@@ -3,9 +3,11 @@
  * Usage: npx ts-node scripts/reschedule-now.ts
  */
 
-import * as AWS from 'aws-sdk';
+import { DynamoDB } from '@aws-sdk/client-dynamodb';
+import { DynamoDBDocumentClient, ScanCommand, QueryCommand, UpdateCommand } from '@aws-sdk/lib-dynamodb';
 
-const dynamodb = new AWS.DynamoDB.DocumentClient();
+const client = new DynamoDB({ region: process.env.AWS_REGION || 'us-east-1' });
+const dynamodb = DynamoDBDocumentClient.from(client);
 
 async function rescheduleTasksToNow() {
   console.log('🔄 Пересоздание всех задач на ТЕКУЩЕЕ ВРЕМЯ...\n');
@@ -16,7 +18,7 @@ async function rescheduleTasksToNow() {
 
   try {
     // Get all active run first
-    const runsResult = await dynamodb.scan({
+    const runsResult = await dynamodb.send(new ScanCommand({
       TableName: 'AdsterraRuns',
       FilterExpression: '#status = :status',
       ExpressionAttributeNames: {
@@ -25,7 +27,7 @@ async function rescheduleTasksToNow() {
       ExpressionAttributeValues: {
         ':status': 'active'
       }
-    }).promise();
+    }));
 
     const runs = runsResult.Items || [];
     
@@ -40,7 +42,7 @@ async function rescheduleTasksToNow() {
       console.log(`📦 Processing run: ${run.id}`);
       
       // Get all pending jobs for this run
-      const jobsResult = await dynamodb.query({
+      const jobsResult = await dynamodb.send(new QueryCommand({
         TableName: 'AdsterraJobs',
         KeyConditionExpression: 'runId = :runId',
         FilterExpression: '#status IN (:pending, :ready)',
@@ -52,7 +54,7 @@ async function rescheduleTasksToNow() {
           ':pending': 'pending',
           ':ready': 'ready'
         }
-      }).promise();
+      }));
 
       const jobs = jobsResult.Items || [];
       console.log(`   📊 Found ${jobs.length} pending/ready jobs`);
@@ -65,7 +67,7 @@ async function rescheduleTasksToNow() {
           const delayMs = Math.random() * 2000 + 1000;
           const scheduledTime = new Date(now.getTime() + delayMs);
 
-          await dynamodb.update({
+          await dynamodb.send(new UpdateCommand({
             TableName: 'AdsterraJobs',
             Key: {
               runId: job.runId,
@@ -79,7 +81,7 @@ async function rescheduleTasksToNow() {
               ':scheduledTime': scheduledTime.toISOString(),
               ':status': 'ready'
             }
-          }).promise();
+          }));
 
           updated++;
         } catch (err) {

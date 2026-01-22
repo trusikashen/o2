@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "next dev",
     "frontend": "next dev",
-    "build:netlify": "next build && next export",
+    "build:netlify": "next build",
     "build:aws": "next build",
     "start:aws": "next start",
     "worker": "tsx watch src/worker.ts",

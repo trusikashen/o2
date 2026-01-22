@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import crypto from 'crypto';
 
+export const dynamic = 'force-dynamic';
+
 // Хардкод логин/пароль (замени на свои!)
 const VALID_USERNAME = process.env.APP_USERNAME || 'admin';
 const VALID_PASSWORD = process.env.APP_PASSWORD || 'password123';
