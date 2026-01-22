@@ -41,7 +41,6 @@ async function createTestRun(): Promise<string> {
     maxScrollWait: 5000,
     minAdWait: 2000,
     maxAdWait: 4000,
-    useProxy: false, // ← NO PROXY
     proxyUrl: '', // Empty proxy
   };
   
