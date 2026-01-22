@@ -3,6 +3,7 @@
 
 [build]
   command = "npm run build:netlify"
+  publish = ".netlify"
   environment = { NODE_VERSION = "18.17.0" }
 
 [[plugins]]
