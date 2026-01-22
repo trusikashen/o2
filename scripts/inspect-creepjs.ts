@@ -74,7 +74,7 @@ async function inspectCreepJS() {
         // Find score-like text
         if ((text.includes('lie') || text.includes('score') || text.includes('%')) && 
             text.length > 10 && text.length < 300 &&
-            el.offsetHeight > 0) { // visible
+            (el as HTMLElement).offsetHeight > 0) { // visible
           result.textWithScore.push({
             text: text.trim().substring(0, 200),
             tag: el.tagName,
