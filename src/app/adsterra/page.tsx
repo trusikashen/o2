@@ -936,7 +936,7 @@ export default function AdsterraPage() {
           {runs.length === 0 ? (
             <p className={`text-sm ${darkMode ? 'text-slate-400' : 'text-gray-500'}`}>No runs yet. Create one below.</p>
           ) : (
-            <div className="space-y-1">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-1">
               {runs.map((run) => {
                 const totalSessions = (run?.config?.totalBots || 0) * (run?.config?.sessionsPerBot || 0);
                 const createdAt = run.createdAt ? new Date(run.createdAt).toLocaleString() : null;
@@ -961,10 +961,10 @@ export default function AdsterraPage() {
                       }
                     `}</style>
                   )}
-                  <div key={run.id} id={`run-${run.id}`} className={`border rounded-lg p-2 transition-all ${run.status === 'running' ? 'relative' : ''} ${darkMode ? (run.status === 'running' ? 'bg-slate-700 hover:bg-slate-650' : 'border-slate-600 bg-slate-700 hover:bg-slate-650') : (run.status === 'running' ? 'bg-white hover:shadow-md shadow-lg' : 'border-gray-200 bg-white hover:shadow-md')}`}>
-                <div className="flex justify-between items-start gap-2 mb-1">
+                  <div key={run.id} id={`run-${run.id}`} className={`border rounded p-1 transition-all ${run.status === 'running' ? 'relative' : ''} ${darkMode ? (run.status === 'running' ? 'bg-slate-700 hover:bg-slate-650' : 'border-slate-600 bg-slate-700 hover:bg-slate-650') : (run.status === 'running' ? 'bg-white hover:shadow-md shadow-lg' : 'border-gray-200 bg-white hover:shadow-md')}`}>
+                <div className="flex justify-between items-start gap-1 mb-0.5">
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 flex-wrap mb-1">
+                      <div className="flex items-center gap-1 flex-wrap mb-0.5">
                         {editingRunId === run.id ? (
                           <input
                             type="text"
@@ -1033,7 +1033,7 @@ export default function AdsterraPage() {
                           {run.status?.toUpperCase() || 'PENDING'}
                     </span>
                       </div>
-                      <div className="flex items-center gap-2 text-xs flex-wrap">
+                      <div className="flex items-center gap-1 text-xs flex-wrap">
                         {createdAt && (
                           <span className={darkMode ? 'text-slate-400' : 'text-gray-500'}>Created: {createdAt}</span>
                         )}
@@ -1043,13 +1043,13 @@ export default function AdsterraPage() {
                   </div>
                   
                   {/* Key Metrics - Enlarged & More Visible */}
-                  <div className={`mb-1.5 p-2 rounded border ${darkMode ? 'bg-slate-700 border-slate-600' : 'bg-gray-50 border-gray-200'}`}>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-1.5 mb-1.5">
+                  <div className={`mb-1 p-1 rounded border ${darkMode ? 'bg-slate-700 border-slate-600' : 'bg-gray-50 border-gray-200'}`}>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-1 mb-1">
                       {/* Row 1: Worker & Target & Sessions & Config */}
-                      <div className={`p-1.5 rounded text-center ${darkMode ? 'bg-slate-800' : 'bg-white'}`}>
+                      <div className={`p-1 rounded text-center ${darkMode ? 'bg-slate-800' : 'bg-white'}`}>
                         <p className={`text-xs font-medium uppercase tracking-wide mb-0.5 ${darkMode ? 'text-slate-400' : 'text-gray-500'}`}>👷 Worker</p>
-                        <div className="flex items-center justify-center gap-2">
-                          <p className={`font-bold text-base px-2 py-1 rounded ${darkMode ? 'bg-green-900/50 text-green-300 border border-green-700' : 'bg-green-100 text-green-800 border border-green-300'}`}>
+                        <div className="flex items-center justify-center gap-1">
+                          <p className={`font-bold text-sm px-1.5 py-0.5 rounded ${darkMode ? 'bg-green-900/50 text-green-300 border border-green-700' : 'bg-green-100 text-green-800 border border-green-300'}`}>
                             {run?.assignedWorkerIds?.[0] ?? 'Any Worker'}
                           </p>
                           {run.status === 'running' && (
@@ -1067,56 +1067,56 @@ export default function AdsterraPage() {
                         </div>
                       </div>
 
-                      <div className={`p-1.5 rounded text-center ${darkMode ? 'bg-slate-800' : 'bg-white'}`}>
+                      <div className={`p-1 rounded text-center ${darkMode ? 'bg-slate-800' : 'bg-white'}`}>
                         <p className={`text-xs font-medium uppercase tracking-wide mb-0.5 ${darkMode ? 'text-slate-400' : 'text-gray-500'}`}>👁️ Target</p>
-                        <p className={`font-bold text-base ${darkMode ? 'text-blue-300' : 'text-blue-600'}`}>
+                        <p className={`font-bold text-sm ${darkMode ? 'text-blue-300' : 'text-blue-600'}`}>
                           {typeof run?.config?.targetImpressions === 'number'
                             ? (run.config.targetImpressions / 1000).toFixed(1) + 'k'
                             : '—'}
                         </p>
                       </div>
 
-                      <div className={`p-1.5 rounded text-center ${darkMode ? 'bg-slate-800' : 'bg-white'}`}>
+                      <div className={`p-1 rounded text-center ${darkMode ? 'bg-slate-800' : 'bg-white'}`}>
                         <p className={`text-xs font-medium uppercase tracking-wide mb-0.5 ${darkMode ? 'text-slate-400' : 'text-gray-500'}`}>📊 Sessions</p>
-                        <p className={`font-bold text-base ${darkMode ? 'text-purple-300' : 'text-purple-600'}`}>
+                        <p className={`font-bold text-sm ${darkMode ? 'text-purple-300' : 'text-purple-600'}`}>
                           {totalSessions > 0 ? (totalSessions / 1000).toFixed(1) + 'k' : '—'}
                         </p>
                       </div>
 
-                      <div className={`p-1.5 rounded text-center ${darkMode ? 'bg-slate-800' : 'bg-white'}`}>
+                      <div className={`p-1 rounded text-center ${darkMode ? 'bg-slate-800' : 'bg-white'}`}>
                         <p className={`text-xs font-medium uppercase tracking-wide mb-0.5 ${darkMode ? 'text-slate-400' : 'text-gray-500'}`}>⚙️ Config</p>
-                        <p className={`font-bold text-base ${darkMode ? 'text-amber-300' : 'text-amber-600'}`}>
+                        <p className={`font-bold text-sm ${darkMode ? 'text-amber-300' : 'text-amber-600'}`}>
                           {run?.config?.totalBots || '—'} × {run?.config?.sessionsPerBot || '—'}
                         </p>
                       </div>
                     </div>
 
                     {/* Row 2: Pacing, Mode, Bot Index, Status */}
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-1.5">
-                      <div className={`p-1.5 rounded text-center ${darkMode ? 'bg-slate-800' : 'bg-white'}`}>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-1">
+                      <div className={`p-1 rounded text-center ${darkMode ? 'bg-slate-800' : 'bg-white'}`}>
                         <p className={`text-xs font-medium uppercase tracking-wide mb-0.5 ${darkMode ? 'text-slate-400' : 'text-gray-500'}`}>🐇 Pacing</p>
-                        <p className={`font-bold text-base capitalize ${darkMode ? 'text-indigo-300' : 'text-indigo-600'}`}>
+                        <p className={`font-bold text-sm capitalize ${darkMode ? 'text-indigo-300' : 'text-indigo-600'}`}>
                           {run?.config?.pacingMode === 'human' ? 'Human' : run?.config?.pacingMode === 'fast' ? 'Fast' : 'Standard'}
                         </p>
                       </div>
 
-                      <div className={`p-1.5 rounded text-center ${darkMode ? 'bg-slate-800' : 'bg-white'}`}>
+                      <div className={`p-1 rounded text-center ${darkMode ? 'bg-slate-800' : 'bg-white'}`}>
                         <p className={`text-xs font-medium uppercase tracking-wide mb-0.5 ${darkMode ? 'text-slate-400' : 'text-gray-500'}`}>🖥️ Browser</p>
-                        <p className={`font-bold text-base ${run?.config?.browserHeadless !== false ? (darkMode ? 'text-gray-300' : 'text-gray-600') : (darkMode ? 'text-yellow-300' : 'text-yellow-600')}`}>
+                        <p className={`font-bold text-sm ${run?.config?.browserHeadless !== false ? (darkMode ? 'text-gray-300' : 'text-gray-600') : (darkMode ? 'text-yellow-300' : 'text-yellow-600')}`}>
                           {run?.config?.browserHeadless !== false ? 'Headless' : 'UI'}
                         </p>
                       </div>
 
-                      <div className={`p-1.5 rounded text-center ${darkMode ? 'bg-slate-800' : 'bg-white'}`}>
+                      <div className={`p-1 rounded text-center ${darkMode ? 'bg-slate-800' : 'bg-white'}`}>
                         <p className={`text-xs font-medium uppercase tracking-wide mb-0.5 ${darkMode ? 'text-slate-400' : 'text-gray-500'}`}>📍 Bot #</p>
-                        <p className={`font-bold text-base ${darkMode ? 'text-cyan-300' : 'text-cyan-600'}`}>
+                        <p className={`font-bold text-sm ${darkMode ? 'text-cyan-300' : 'text-cyan-600'}`}>
                           {run?.config?.currentBotIndex !== undefined && run?.config?.currentBotIndex !== null 
                             ? `${(run.config.currentBotIndex || 0) + 1}` 
                             : (run?.config?.totalBots ? 'Ready' : '—')}
                         </p>
                       </div>
 
-                      <div className={`p-1.5 rounded text-center ${darkMode ? 'bg-slate-800' : 'bg-white'}`}>
+                      <div className={`p-1 rounded text-center ${darkMode ? 'bg-slate-800' : 'bg-white'}`}>
                         <p className={`text-xs font-medium uppercase tracking-wide mb-0.5 ${darkMode ? 'text-slate-400' : 'text-gray-500'}`}>✨ Status</p>
                         <span className={`inline-block px-2 py-1 rounded-full text-xs font-bold ${
                           run.status === 'running' ? (darkMode ? 'bg-green-900 text-green-200' : 'bg-green-100 text-green-800') :
@@ -1249,35 +1249,6 @@ export default function AdsterraPage() {
               })}
             </div>
           )}
-        </div>
-
-        {/* Mode Selector - Compact */}
-        <div className={`rounded-lg p-4 mb-4 border ${darkMode ? 'bg-slate-800 border-slate-700' : 'bg-white border-gray-200'}`}>
-          <div className="flex gap-2 flex-wrap">
-            <button
-              onClick={() => {
-                setConfigMode('template');
-                setSelectedProfitConfigId('');
-              }}
-              className={`px-4 py-2 rounded font-semibold text-sm transition-all ${
-                configMode === 'template'
-                  ? 'bg-blue-600 text-white'
-                  : darkMode ? 'bg-slate-700 text-gray-200 hover:bg-slate-600' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-              }`}
-            >
-              📋 Templates
-            </button>
-            <button
-              onClick={() => setConfigMode('custom')}
-              className={`px-4 py-2 rounded font-semibold text-sm transition-all ${
-                configMode === 'custom'
-                  ? 'bg-blue-600 text-white'
-                  : darkMode ? 'bg-slate-700 text-gray-200 hover:bg-slate-600' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-              }`}
-            >
-              ⚙️ Custom
-            </button>
-          </div>
         </div>
 
         {/* Create Run Form - Collapsible & Compact - APPEARS FIRST */}
