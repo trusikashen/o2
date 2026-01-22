@@ -245,12 +245,16 @@ export async function getNextJobForWorker(
   // 1. Assigned to this specific worker
   // 2. Unassigned (assignedWorkerId is null or undefined) - for backward compatibility
   // Note: We do NOT return jobs assigned to OTHER workers
+  // COMPATIBILITY FIX: Check both 'assignedWorker' (old field) and 'assignedWorkerId' (new field)
   const item = result.Items.find(
     (item) => {
+      // Support both old field name (assignedWorker) and new field name (assignedWorkerId)
+      const assignedWorkerId = item.assignedWorkerId || item.assignedWorker;
+      
       // If job is assigned to this worker, return it
-      if (item.assignedWorkerId === workerId) return true;
+      if (assignedWorkerId === workerId) return true;
       // If job is unassigned, return it (backward compatibility)
-      if (!item.assignedWorkerId || item.assignedWorkerId === null) return true;
+      if (!assignedWorkerId) return true;
       // Don't return jobs assigned to other workers
       return false;
     }
@@ -294,7 +298,7 @@ export async function markJobActive(jobId: string, workerId?: string): Promise<b
             SK: 'META',
           },
           UpdateExpression: 'SET #status = :status, updatedAt = :now, GSI1PK = :gsi1pk, assignedWorkerId = :workerId, assignedAt = :assignedAt',
-          ConditionExpression: '#status = :pending AND (assignedWorkerId = :workerId OR attribute_not_exists(assignedWorkerId))',
+          ConditionExpression: '#status = :pending AND (assignedWorkerId = :workerId OR assignedWorker = :workerId OR (attribute_not_exists(assignedWorkerId) AND attribute_not_exists(assignedWorker)))',
           ExpressionAttributeNames: {
             '#status': 'status',
           },
