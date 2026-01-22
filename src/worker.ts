@@ -397,10 +397,13 @@ async function workerLoop() {
   
   // Spawn worker threads that compete for semaphore permits
   // Keep worker threads slightly higher than max concurrency to ensure we always have jobs ready
-  // But NOT too many - each worker thread consumes memory even when waiting
+  // CRITICAL: MAX_WORKER_THREADS should equal currentConcurrency (not more)
+  // Each worker thread can process ONE job at a time
+  // If we have more threads than concurrency limit, we'll start too many jobs simultaneously
+  // Example: currentConcurrency=5 but threads=10 means all 10 could grab jobs at once!
   const MAX_WORKER_THREADS = Math.min(
-    currentConcurrency + 5, // Just a few more than concurrency to keep pipeline full
-    parseInt(process.env.MAX_WORKER_THREADS || '15', 10) // Hard cap at 15 by default
+    currentConcurrency, // MUST equal concurrency - one job per thread max
+    parseInt(process.env.MAX_WORKER_THREADS || '10', 10) // Hard cap at 10 by default
   );
   
   console.log('\n' + '='.repeat(60));
