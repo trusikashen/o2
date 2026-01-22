@@ -41,7 +41,6 @@ async function createTestRun(): Promise<string> {
     maxScrollWait: 5000,
     minAdWait: 2000,
     maxAdWait: 4000,
-    proxyUrl: '', // Empty proxy
   };
   
   await ddbDocClient.send(
