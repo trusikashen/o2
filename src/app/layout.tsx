@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import { ProtectedLayout } from '@/components/ProtectedLayout'
 
 export const metadata: Metadata = {
   title: 'Adsterra Bot Management',
@@ -13,7 +14,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <ProtectedLayout>
+          {children}
+        </ProtectedLayout>
+      </body>
     </html>
   )
 }
