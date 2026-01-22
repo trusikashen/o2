@@ -1,0 +1,20 @@
+name: adsterra-bot
+region: nyc
+workers:
+  - name: worker
+    github:
+      repo: footyamigo/adsterra
+      branch: main
+      deploy_on_push: true
+    build_command: npm install
+    run_command: npm start
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    envs:
+      - key: NODE_ENV
+        value: production
+      - key: PROCESS_IMMEDIATELY
+        value: "true"
+      # Note: Add all other environment variables in DigitalOcean dashboard
+      # AWS credentials, proxy settings, etc. should be added via UI
+

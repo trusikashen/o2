@@ -1,0 +1,8 @@
+{
+  "/api/adsterra/runs/[runId]/stats/route": "app/api/adsterra/runs/[runId]/stats/route.js",
+  "/api/adsterra/runs/route": "app/api/adsterra/runs/route.js",
+  "/api/workers/heartbeat/route": "app/api/workers/heartbeat/route.js",
+  "/adsterra/page": "app/adsterra/page.js",
+  "/api/adsterra/runs/[runId]/route": "app/api/adsterra/runs/[runId]/route.js",
+  "/api/adsterra/runs/[runId]/test-local/route": "app/api/adsterra/runs/[runId]/test-local/route.js"
+}
