@@ -1,0 +1,32 @@
+# Netlify configuration for Adsterra Bot Frontend
+# Frontend-only deployment (React + Next.js static export)
+
+[build]
+  command = "npm run build:netlify"
+  publish = "out"
+  environment = { NODE_VERSION = "18.17.0" }
+
+# Redirect all API calls to AWS Backend
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api-proxy"
+  status = 200
+
+# Static routing for Next.js routes
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Environment variables
+[context.production.environment]
+  REACT_APP_API_URL = "https://your-aws-backend.com"
+  NEXT_PUBLIC_API_URL = "https://your-aws-backend.com"
+
+[context.preview.environment]
+  REACT_APP_API_URL = "https://your-aws-backend-staging.com"
+  NEXT_PUBLIC_API_URL = "https://your-aws-backend-staging.com"
+
+[context.branch-deploy.environment]
+  REACT_APP_API_URL = "https://your-aws-backend-dev.com"
+  NEXT_PUBLIC_API_URL = "https://your-aws-backend-dev.com"

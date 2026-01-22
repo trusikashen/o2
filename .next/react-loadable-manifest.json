@@ -1,1 +1,21 @@
-{}
+{
+  "components\\TerminalModal.tsx -> xterm": {
+    "id": "components\\TerminalModal.tsx -> xterm",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_xterm_lib_xterm_js.js"
+    ]
+  },
+  "components\\TerminalModal.tsx -> xterm-addon-fit": {
+    "id": "components\\TerminalModal.tsx -> xterm-addon-fit",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_xterm-addon-fit_lib_xterm-addon-fit_js.js"
+    ]
+  },
+  "components\\TerminalModal.tsx -> xterm/css/xterm.css": {
+    "id": "components\\TerminalModal.tsx -> xterm/css/xterm.css",
+    "files": [
+      "static/css/_app-pages-browser_node_modules_xterm_css_xterm_css.css",
+      "static/chunks/_app-pages-browser_node_modules_xterm_css_xterm_css.js"
+    ]
+  }
+}

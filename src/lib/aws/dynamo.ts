@@ -7,8 +7,8 @@ const client = new DynamoDBClient({
 
 export const ddbDocClient = DynamoDBDocumentClient.from(client);
 
-export const BOT_FAMILIES_TABLE = process.env.DYNAMODB_BOT_FAMILIES_TABLE!;
-export const BOT_INSTANCES_TABLE = process.env.DYNAMODB_BOT_INSTANCES_TABLE!;
-export const YOUTUBE_RUNS_TABLE = process.env.DYNAMODB_YOUTUBE_RUNS_TABLE!;
-export const YOUTUBE_BOTS_TABLE = process.env.DYNAMODB_YOUTUBE_BOTS_TABLE!;
+export const BOT_FAMILIES_TABLE = process.env.DYNAMODB_BOT_FAMILIES_TABLE || 'BotFamilies';
+export const BOT_INSTANCES_TABLE = process.env.DYNAMODB_BOT_INSTANCES_TABLE || 'BotInstances';
+export const YOUTUBE_RUNS_TABLE = process.env.DYNAMODB_YOUTUBE_RUNS_TABLE || 'YouTubeRuns';
+export const YOUTUBE_BOTS_TABLE = process.env.DYNAMODB_YOUTUBE_BOTS_TABLE || 'YouTubeBots';
 

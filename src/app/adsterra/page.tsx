@@ -2,11 +2,12 @@
 
 import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
-import { Play, Square, Trash2, Calendar, TestTube, Info, Edit2, Check } from 'lucide-react';
+import { Play, Square, Trash2, Calendar, TestTube, Info, Edit2, Check, Terminal as TerminalIcon } from 'lucide-react';
 import type { AdsterraRun, AdsterraConfig } from '@/types/adsterra';
 import { getAllAdsterraProfitConfigs, type AdsterraProfitConfig } from '@/lib/adsterraProfitConfigs';
 import { calculateOptimalConcurrency } from '@/lib/adsterra/concurrency-calculator';
 import { calculateDistributionMatrix, type DistributionMatrix } from '@/lib/adsterra/distribution-calculator';
+import { TerminalModal } from '@/components/TerminalModal';
 
 export default function AdsterraPage() {
   const [runs, setRuns] = useState<AdsterraRun[]>([]);
@@ -48,6 +49,9 @@ export default function AdsterraPage() {
   // Edit run name state
   const [editingRunId, setEditingRunId] = useState<string | null>(null);
   const [editingRunName, setEditingRunName] = useState('');
+  
+  // SSH Terminal modal state
+  const [showTerminal, setShowTerminal] = useState(false);
 
   // Form state
   const [runName, setRunName] = useState('');
@@ -468,6 +472,13 @@ export default function AdsterraPage() {
               className={`px-3 py-2 rounded font-medium ${darkMode ? 'bg-slate-700 text-yellow-400 hover:bg-slate-600' : 'bg-gray-300 text-gray-900 hover:bg-gray-400'}`}
             >
               {darkMode ? '☀️' : '🌙'}
+            </button>
+            <button
+              onClick={() => setShowTerminal(true)}
+              className={`px-3 py-2 rounded font-medium flex items-center gap-1 ${darkMode ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-blue-200 text-blue-900 hover:bg-blue-300'}`}
+              title="Open SSH Terminal"
+            >
+              <TerminalIcon size={16} /> Terminal
             </button>
             <button
               onClick={handleOpenEnvModal}
@@ -1837,6 +1848,9 @@ export default function AdsterraPage() {
           </div>
         </div>
       )}
+
+      {/* SSH Terminal Modal */}
+      <TerminalModal isOpen={showTerminal} onClose={() => setShowTerminal(false)} />
     </div>
   );
 }
