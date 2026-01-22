@@ -26,7 +26,7 @@ async function initWorkerStatusTable() {
       console.log(`   Billing Mode: ${describeResult.Table?.BillingModeSummary?.BillingMode}`);
       
       // Check if TTL is enabled
-      if (describeResult.Table?.TimeToLiveDescription?.TimeToLiveStatus === 'ENABLED') {
+      if ((describeResult.Table as any)?.TimeToLiveDescription?.TimeToLiveStatus === 'ENABLED') {
         console.log(`   TTL: ✅ Enabled on "TTL" attribute`);
       } else {
         console.log(`   TTL: ⚠️  Not enabled (should be enabled on "TTL" attribute)`);
