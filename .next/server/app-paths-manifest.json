@@ -1,5 +1,5 @@
 {
-  "/adsterra/page": "app/adsterra/page.js",
   "/api/adsterra/runs/route": "app/api/adsterra/runs/route.js",
-  "/api/adsterra/runs/[runId]/stats/route": "app/api/adsterra/runs/[runId]/stats/route.js"
+  "/api/adsterra/runs/[runId]/stats/route": "app/api/adsterra/runs/[runId]/stats/route.js",
+  "/adsterra/page": "app/adsterra/page.js"
 }
